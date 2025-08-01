@@ -13,6 +13,7 @@ import Applications from "@/pages/applications";
 import Messages from "@/pages/messages";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
+import Admin from "@/pages/admin";
 import Navbar from "@/components/navbar";
 
 function Router() {
@@ -28,6 +29,7 @@ function Router() {
         <Route path="/applications" component={Applications} />
         <Route path="/messages" component={Messages} />
         <Route path="/employers" component={Employers} />
+        <Route path="/admin" component={Admin} />
         <Route component={NotFound} />
       </Switch>
     </div>

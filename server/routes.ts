@@ -352,6 +352,78 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Admin routes
+  app.get("/api/admin/stats", async (req, res) => {
+    try {
+      // Get various statistics for admin dashboard
+      const totalUsers = await storage.getUserByEmail("admin123") ? 1 : 0; // Simple count for demo
+      const activeJobs = 12; // Demo data
+      const totalCompanies = 3;
+      const totalApplications = 25;
+      
+      res.json({
+        totalUsers: totalUsers + 10, // Demo numbers
+        activeJobs,
+        totalCompanies,
+        totalApplications,
+        newUsersThisWeek: 3,
+        newJobsThisWeek: 5,
+        newCompaniesThisWeek: 1,
+        newApplicationsThisWeek: 8
+      });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch stats" });
+    }
+  });
+
+  app.get("/api/admin/users", async (req, res) => {
+    try {
+      // In a real app, you'd have proper user management
+      res.json([
+        {
+          id: "1",
+          firstName: "Admin",
+          lastName: "User", 
+          email: "admin123",
+          userType: "admin",
+          location: "New York"
+        },
+        {
+          id: "2",
+          firstName: "John",
+          lastName: "Smith",
+          email: "employer1@example.com",
+          userType: "employer",
+          location: "San Francisco"
+        }
+      ]);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch users" });
+    }
+  });
+
+  app.get("/api/admin/jobs", async (req, res) => {
+    try {
+      const jobs = await storage.getJobs();
+      res.json(jobs);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch jobs" });
+    }
+  });
+
+  app.get("/api/admin/companies", async (req, res) => {
+    try {
+      // Get all companies - in real app you'd have proper admin access
+      res.json([
+        { id: "1", name: "TechCorp Solutions", location: "San Francisco, CA", industry: "Technology", size: "50-200 employees", description: "Leading software development company" },
+        { id: "2", name: "Austin Innovations", location: "Austin, TX", industry: "AI", size: "10-50 employees", description: "AI and ML solutions" },
+        { id: "3", name: "Seattle Tech Hub", location: "Seattle, WA", industry: "Cloud Computing", size: "200-500 employees", description: "Cloud infrastructure services" }
+      ]);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch companies" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, LogOut, Briefcase, MessageSquare } from "lucide-react";
+import { User, LogOut, Briefcase, MessageSquare, Shield } from "lucide-react";
 
 export default function Navbar() {
   const [location] = useLocation();
@@ -89,6 +89,14 @@ export default function Navbar() {
                         My Applications
                       </Link>
                     </DropdownMenuItem>
+                    {user.userType === 'admin' && (
+                      <DropdownMenuItem asChild>
+                        <Link href="/admin" className="flex items-center">
+                          <Shield className="mr-2 h-4 w-4" />
+                          Admin Dashboard
+                        </Link>
+                      </DropdownMenuItem>
+                    )}
                     <DropdownMenuItem onClick={handleLogout}>
                       <LogOut className="mr-2 h-4 w-4" />
                       Log out
