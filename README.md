@@ -105,21 +105,7 @@ npm start
 ```
 
 
-### Deployment 🌍
-- **Single Deploy (Railway/Render/Fly):**
-- Set `DATABASE_URL` (+ `PGSSLMODE=require` if needed).
-- Expose port 5000.
-
-
-- **Split Deploy (Vercel/Netlify + API):**
-- Build client → `npm run build`
-- Deploy `server/public` as static assets.
-- Deploy API → Railway/Render (`npm start`).
-- Configure `VITE_API_URL` for the client if needed.
-
-
 ---
-
 ## 🔐 Security
 - Passwords hashed using **bcrypt**.  
 - PostgreSQL secured with **RLS (Row-Level Security)** & optional **pgcrypto**.  
@@ -152,6 +138,6 @@ graph TD;
 ---
 
 ## 📜 License
-This project is developed as part of **CEP (Computer Engineering Project)** coursework.  
+This project is developed as part of **CEP (Community Engagement Project)** coursework.  
 For academic and demonstration purposes only.  
 ---
